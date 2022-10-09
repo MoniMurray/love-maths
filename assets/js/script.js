@@ -38,7 +38,19 @@ function checkAnswer () {
 
 }
 
+// gets the operands (the numbers) and the operator (+, -, x, /) from the 
+// DOM and checks them
 function checkCorrectAnswer () {
+    let operand1 = parseInt(document.getElementById('operand1').innerHTML);
+    let operand2 = parseInt(document.getElementById('operand2').innerHTML);
+    let operator = document.getElementById('operator').innerHTML;
+
+    if (operator === "+") {
+        return [operand1 + operand2, "addition"];
+    } else {
+        alert (`Unimplemented operator ${operator}`);
+        throw `Unimplemented operator ${operator}. Aborting!`;
+    }
 
 }
 
