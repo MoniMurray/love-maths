@@ -17,8 +17,10 @@ document.addEventListener("DOMContentLoaded", function (){
     }
 })
 
+// Game is to generate two random whole numbers/operands (math.random) between 1-25.
 function runGame () {
-
+    let num1 = Math.floor(Math.random()*25) + 1;
+    let num2 = Math.floor(Math.random()*25) + 1;
 }
 
 function checkAnswer () {
