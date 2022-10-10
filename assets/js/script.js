@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", function (){
     // for each button in the buttons variable...
     for (let button of buttons){
         button.addEventListener('click', function() {
-            if (this.getAttribute("data-type")==="Submit") {
-                checkAnswer();
+            if (this.getAttribute("data-type")==="submit") {
+            checkAnswer();
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
@@ -36,14 +36,16 @@ function runGame (gameType) {
 // check user answer against the first element in the checkCorrectAnswer array
 function checkAnswer () {
 
-    let userAnswer = parseInt(document.getElementById('answer-box').value);
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
     let calculatedAnswer = checkCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
 
     if (isCorrect) {
-        alert ("Hey! You got it right! :)");
+        alert (`Hey you got the answer right! It was ${calculatedAnswer[0]}`);
+        incrementScore();
     } else {
         alert (`Your answer was ${userAnswer}. The correct answer is ${calculatedAnswer[0]}.`);
+        incrementWrongAnswer();
     }
     
     runGame(calculatedAnswer[1]);
@@ -66,12 +68,17 @@ function checkCorrectAnswer () {
 
 }
 
+// read value from DOM, add to 'score' incrementally by 1.  innerText === textContent
 function incrementScore () {
 
+    let oldScore = parseInt(document.getElementById('score').innerText);
+    document.getElementById('score').innerText = ++oldScore;
+    
 }
-
+// read value from DOM, add to 'incorrect' incrementally by 1.
 function incrementWrongAnswer () {
-
+    let oldScore = parseInt(document.getElementById('incorrect').innerText);
+    document.getElementById('incorrect').innerText = ++oldScore;
 }
 
 function displayAdditionQuestion (operand1, operand2) {
