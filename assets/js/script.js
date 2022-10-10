@@ -15,11 +15,21 @@ document.addEventListener("DOMContentLoaded", function (){
             }
         })
     }
+    document.getElementById("answer-box").addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    })
     runGame("addition");
 })
 
 // Game is to generate two random whole numbers/operands (math.random) between 1-25.
 function runGame (gameType) {
+// each time the runGame function is called, the answer box of the question
+// area will be blank, and the cursor will be 'focused' on the answer box to enable the user to play immediately.
+    document.getElementById("answer-box").value = "";
+    document.getElementById("answer-box").focus();
+
     let num1 = Math.floor(Math.random()*25) + 1;
     let num2 = Math.floor(Math.random()*25) + 1;
 
@@ -30,6 +40,8 @@ function runGame (gameType) {
         displayMultiplyQuestion(num1, num2);
         } else if (gameType ==="subtract") {
             displaySubractionQuestion(num1, num2);
+        } else if (gameType === "division") {
+            displayDivisionQuestion(num1, num2);  
         } else {
         alert (`Unknown Game Type: ${gameType}`);
         throw `Unknown Game Type: ${gametype }. Aborting!`;
@@ -75,6 +87,12 @@ function checkCorrectAnswer () {
         if (operator === "-") {
             return [operand1 - operand2, "subtract"];
 
+        } else 
+        
+        if (operator === "/") {
+            let num3 = operand1 / operand2
+            return [Math.round(num3), "division"];
+
         } else {
         alert (`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
@@ -115,6 +133,9 @@ function displayMultiplyQuestion (operand1, operand2) {
 }
 
 // The challenge question - do code myself
-function displayDivisionQuestion () {
+function displayDivisionQuestion (operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById('operand2').textContent = operand1 > operand2 ? operand2 : operand1;
+    document.getElementById('operator').textContent = "/";
 
-}
+    }
